@@ -3,7 +3,7 @@
 
  00000H 000B3H 000B4H _TEXT              CODE
  000C0H 00125H 00066H _DATA              DATA
- 00130H 0022FH 00100H STACK              STACK
+ 00130H 0032FH 00200H STACK              STACK
 
 Program entry point at 0000:0000
 

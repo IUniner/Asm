@@ -1,4 +1,4 @@
-# INCOMING
+# INCOMING (HATES SPACES IN THE END OF STR)
 LAB_NAME=testLAB2
 FILENAMES=$(LAB_NAME)# <== Файл лабы
 
@@ -34,7 +34,7 @@ CMD = $(CMD_INTERFACE) $(1)
 MOVE_CMD = $(call CMD,"copy $(1) $(2)") \
 $(call CMD, "del $(1)")
 
-all: execute# init build or build execute or deb or execute
+all: deb# init build or build execute or deb or execute
 
 init:
 	mkdir -p debug\$(LAB_NAME)
@@ -49,8 +49,8 @@ build:
 	$(call MOVE_CMD,$(OBJECTS),$(DEBUG_FOLDER)) \
 	$(call MOVE_CMD,$(EXECUTABLE),$(DEBUG_FOLDER)) \
 	$(call MOVE_CMD,$(MAP),$(DEBUG_FOLDER)) \
-	$(call CMD,"exit") \
-	# 
+	$(call CMD,"exit")
+
 
 execute:
 	$(DOSBOX_EXECUTOR) \
@@ -64,6 +64,6 @@ deb: build
 	$(call CMD,"mount $(DISK_COMPILATOR_NAME) $(WORK_FOLDER)") \
 	$(call CMD,"mount $(DISK_EXECUTABLE_NAME) $(CURRENT_FOLDER)") \
 	$(call CMD,"$(DISK_EXECUTABLE_NAME):") \
-	$(call CMD,"cd $(DISK_EXECUTABLE_NAME):\$(DEBUG_FOLDER)") \
-	$(call CMD,"$(DISK_COMPILATOR_NAME):\TD.EXE $(DEBUG_FOLDER)\$(EXECUTABLE)")
+	$(call CMD,"cd \$(DEBUG_FOLDER)") \
+	$(call CMD,"$(DISK_COMPILATOR_NAME):\TD.EXE $(EXECUTABLE)")
 	
