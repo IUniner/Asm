@@ -6,12 +6,16 @@ b dw 2
 c dw 3
 d dw 4
 
+max db 10 ; - max lenght
+ len db ? ; - length in fact
+ Str db 10 
+
 .code
 outint proc
 	add ax,3030h
 	mov dl,ah
 	mov dh,al
-	mov ah,02h
+	mov ah,02h ; input num's symbol 
 	int 21h
 	mov dl,dh
 	int 21h
@@ -69,6 +73,10 @@ else_ft:
 		and cx,d
 		add ax,cx
 if_end:
+
+LEA DX, max
+MOV AH, 0Ah ; - user should input a string 
+INT 21h
 
 call outint
 exit:

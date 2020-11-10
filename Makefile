@@ -1,5 +1,5 @@
 # INCOMING (HATES SPACES IN THE END OF STR)
-LAB_NAME=testLAB2
+LAB_NAME=LAB2
 FILENAMES=$(LAB_NAME)# <== Файл лабы
 
 DOSBOX_EXECUTOR=dosbox
@@ -34,7 +34,7 @@ CMD = $(CMD_INTERFACE) $(1)
 MOVE_CMD = $(call CMD,"copy $(1) $(2)") \
 $(call CMD, "del $(1)")
 
-all: deb# init build or build execute or deb or execute
+all: build execute# init build or build execute or deb or execute
 
 init:
 	mkdir -p debug\$(LAB_NAME)
@@ -51,13 +51,12 @@ build:
 	$(call MOVE_CMD,$(MAP),$(DEBUG_FOLDER)) \
 	$(call CMD,"exit")
 
-
 execute:
 	$(DOSBOX_EXECUTOR) \
 	$(call CMD,"mount $(DISK_EXECUTABLE_NAME) $(DEBUG_FOLDER)") \
 	$(call CMD,"$(DISK_EXECUTABLE_NAME):") \
-	# $(call CMD,"cls") \
-	$(call CMD,"$(EXECUTABLE)") 
+	#$(call CMD,"cls") \
+	$(call CMD,"$(EXECUTABLE)")
 	
 deb: build
 	$(DOSBOX_EXECUTOR) \

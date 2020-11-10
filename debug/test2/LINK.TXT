@@ -1,2 +1,2 @@
 Turbo Link  Version 4.01 Copyright (c) 1991 Borland International
-Fatal: Unable to open file 'testlab2.obj'
+Fatal: 32-bit record encountered in module TEST2.ASM

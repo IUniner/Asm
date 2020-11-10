@@ -1,7 +1,7 @@
 Turbo Assembler  Version 4.0  Copyright (c) 1988, 1993 Borland International
 
-Assembling file:   LAB1.ASM
-*Warning* LAB1.ASM(11) Reserved word used as symbol: STR
+Assembling file:   s2s.ASM
+*Warning* s2s.ASM(9) Reserved word used as symbol: STR
 Error messages:    None
 Warning messages:  1
 Passes:            1

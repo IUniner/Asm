@@ -1,77 +1,126 @@
-.model small ;lab1
-.stack 100h
+.model small
+.stack 200h
 .data
-a dw 1
-b dw 2
-c dw 3
-d dw 4
+                    strMLen  =  128
+                    newStr   db 10,13,'$' 
+                    initStr  db strMLen, strMLen dup ('$') 
+                    str1    db 13," Enter first number: $"     ;13 - space, 10-enter
+                    str2    db " Enter second number: $"
 
+                    eachr    db 0
+
+                    n2      dw 0
+                    buf1     db 13,10,24 dup('$')
+                    buf      db 8,10 dup(0)
+
+                    strLen   db ?
+                    blockLen db ?
+                    blockNum db ?
 .code
-outint proc
-	add ax,3030h
-	mov dl,ah
-	mov dh,al
-	mov ah,02h
-	int 21h
-	mov dl,dh
-	int 21h
-	ret
-outint endp
+decPrint proc                       ; перевод из ax в строку буфера приёма es:di
+                    push cx         ;сохраняем регистры
+                    push dx
+                    push bx
+                    push ax
+                                    ;es:di - адрес буфера приемника
+                    mov bx,10       ; основание системы
+                    xor cx,cx       ; длина числа
+divNum:
+                    xor dx,dx       ; dx = 0
+                    div bx          ; dx = mod(ax, bx)
+                    push dx         ; сохраняем dx в стек
+                    inc cx          ; for LOOP
+                    cmp ax,0        ;test ax,ax      ; ax and ax = 0? : ZF = 1
+                    jnz divNum
+printNum:
+                    pop dx
+                    add dl,'0'
+                    mov AH,02h
+                    int 21h
+                    ;pop ax          ; берём число из стека от начала
+                    ;add al,'0'      ; число в ASCII
+                    ;stosb           ; ES:[DI] = AL DF=0 (флаг направления) => DI = DI+1 , если 1 =>DI= DI - 1      or POP DX|ADD DL,'0'|MOV AH,02h|INT 21h 
+                    loop printNum
 
-main:
-mov ax,@data	; ah -> ax, al -> cx
-mov ds,ax	; bh -> bx, bl -> dx
+                    pop ax
+                    pop bx          ;восстанавливаем регистры
+                    pop dx
+                    pop cx
+                    ret
+decPrint endp
+start:
+	                mov ax,@data	;настраиваем сегментные регистры
+                	mov ds,ax
+                    mov es,ax
 
-if_ft:
-	mov bx,a 
-	xor bx,b
-	xor bx,c
-	xor bx,d
+                    xor dl,dl
+                    lea cx, initStr
+                    mov si, cx
 
-	mov dx,a 
-	or dx,b
-	or dx,c
-	or dx,d
+                    xor cx,cx;!
 
-	cmp bx,dx
-	jne else_ft
-	
-	mov ax, a ; ah or ax
-	add ax,b
-	add ax,c
-	add ax,d
-	jmp if_end
+charEnteringStr:
+                    mov ah,01h
+                    int 21h
+                    push ax
+                    cmp al,10
+                    jz finish
+                    cmp al,13
+                    jz finish
+                    mov [si+1],al
+                    inc dl
+                    inc si
+                    inc cx ;!
+                    jmp charEnteringStr
+finish:
+                    mov cx,dx;!
+                    xor dx,dx;!
+                    ;!lea dx,si
+                    mov ax,cx
+writeStr:
+                    pop dx
+                    ;add dl,'1'
+                    ; SI:DI <- full str
+                    mov ah,02h
+                    int 21h
+                    loop writeStr
 
-else_ft:
-	if_sd:
-		mov bx,b ;bh or bx
-		and bx,c
-		add bx,a
-		jc else_sd
 
-		mov dx,b ; bl or dx
-		and dx,c
-		and dx,d
 
-		cmp bx,dx
-		jne else_sd
+count:
+                    inc eachr
+                    xor ax,ax
+                    mov al,strLen
+                    div eachr
+                    cmp ah,0            ;test ah,ah
+                    jnz count
 
-		mov ax,a
-		xor ax,b
-		mov cx,c ; al or cx
-		and cx ,d
-		xor ax,cx
-		jmp if_end
-	else_sd:
-		mov ax,a
-		xor ax,b
-		mov cx,c
-		and cx,d
-		add ax,cx
-if_end:
+                    mov blockLen,al
+                    mov al,strLen
+                    cmp eachr,al
+                    jz exit
 
-call outint
-exit:
-mov ax,4c00h ; mov ah,4ch
-int 21h
-end main
+                    mov blockNum,0
+exchng:
+                    inc blockNum
+                    mov al,blockLen
+                    cmp blockNum,al
+                    jz exit
+                    lea si, initStr+2
+                    lea di, initStr+2
+                    mov al,eachr
+                    mul blockNum
+                    add di,ax
+                    xor cx,cx
+                    mov cl,eachr
+                    repe cmpsb          ; cmp ES:SI and ES:DI (byte)
+                    jnz count
+                    jmp exchng
+exit: 
+                    xor ax,ax
+                    mov al,eachr
+
+                    call decPrint
+                    mov ax,4c00h
+                    int 21h
+end start                    
