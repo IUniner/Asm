@@ -72,13 +72,33 @@ charEnteringStr:
                     inc si
                     inc cx ;!
                     jmp charEnteringStr
+
+                    ;mov cx,si
+
 finish:
-                    mov cx,dx;!
+                    ;push 
+                    
                     xor dx,dx;!
                     ;!lea dx,si
-                    mov ax,cx
+                    mov bx,cx
+                    ;sub bx,2
+                    ;mov cx,bx;!
+                    ;mov [si],[si-2]
+reverse:
+                    push [si]
+                    dec si
+                    loop reverse
+                    
+
+                    mov cx,bx
+                    mov si,bx
+                    xor dx,dx
 writeStr:
                     pop dx
+                    ;xor dx,dx
+                    ;mov dl,[si-]
+                    ;push dx
+                    ;dec si
                     ;add dl,'1'
                     ; SI:DI <- full str
                     mov ah,02h
