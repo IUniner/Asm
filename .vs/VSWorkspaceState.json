@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\debug"
+    "\\debug",
+    "\\debug\\LAB2"
   ],
-  "SelectedNode": "\\Testlab2.asm",
+  "SelectedNode": "\\debug\\LAB2\\LAB2.EXE",
   "PreviewInSolutionExplorer": false
 }
