@@ -115,3 +115,10 @@ printint_break:
     loop printint_break
     ret
 printint endp
+
+в 16-разрядной системе 
+push ax эквивалентно 
+mov [sp],ax
+sub sp,2 
+следовательно, чтобы очистить стек после N команд push ax нужно сделать 
+add sp,N*2

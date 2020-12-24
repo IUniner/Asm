@@ -1,0 +1,6 @@
+﻿  CA_WORKSPACE.cpp
+d:\asm\debug\lab4\c++\ca_workspace\ca_workspace\ca_workspace.cpp(12): warning C4018: '<': signed/unsigned mismatch
+d:\asm\debug\lab4\c++\ca_workspace\ca_workspace\ca_workspace.cpp(34): warning C4018: '<': signed/unsigned mismatch
+d:\asm\debug\lab4\c++\ca_workspace\ca_workspace\ca_workspace.cpp(42): warning C4018: '<': signed/unsigned mismatch
+d:\asm\debug\lab4\c++\ca_workspace\ca_workspace\ca_workspace.cpp(46): warning C4018: '<': signed/unsigned mismatch
+  CA_WORKSPACE.vcxproj -> D:\Asm\debug\LAB4\C++\CA_WORKSPACE\Debug\CA_WORKSPACE.exe

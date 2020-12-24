@@ -4,5 +4,5 @@ Assembling file:   LAB2.ASM
 Error messages:    None
 Warning messages:  None
 Passes:            1
-Remaining memory:  467k
+Remaining memory:  466k
 
