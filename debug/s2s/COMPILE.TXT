@@ -1,9 +1,0 @@
-Turbo Assembler  Version 4.0  Copyright (c) 1988, 1993 Borland International
-
-Assembling file:   s2s.ASM
-*Warning* s2s.ASM(9) Reserved word used as symbol: STR
-Error messages:    None
-Warning messages:  1
-Passes:            1
-Remaining memory:  468k
-

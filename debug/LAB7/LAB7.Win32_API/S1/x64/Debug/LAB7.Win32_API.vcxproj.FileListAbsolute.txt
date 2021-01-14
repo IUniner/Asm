@@ -1,0 +1,2 @@
+D:\Asm\debug\LAB7\LAB7.Win32_API\x64\Debug\LAB7.Win32_API.exe
+D:\Asm\debug\LAB7\LAB7.Win32_API\x64\Debug\LAB7.Win32_API.pdb

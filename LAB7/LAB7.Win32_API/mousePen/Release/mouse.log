@@ -1,0 +1,2 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (mouse.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  mouse.vcxproj -> D:\Asm\debug\LAB7\LAB7.Win32_API\Release\mousePen.exe

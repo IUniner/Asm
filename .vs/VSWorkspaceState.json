@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\debug",
-    "\\debug\\LAB2"
+    "\\debug\\LAB7",
+    "\\debug\\LAB7\\LAB7.Win32_API"
   ],
-  "SelectedNode": "\\debug\\LAB2\\LAB2.EXE",
+  "SelectedNode": "\\debug\\LAB7\\LAB7.Win32_API\\Release",
   "PreviewInSolutionExplorer": false
 }

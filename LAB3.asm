@@ -7,8 +7,8 @@
                     str1            db 0Dh,'Enter first number: ',0Ah,'$'     ;13 - return carriage, 10-enter / newLine
                     str2            db 0Dh,'Enter second number: ',0Ah,'$'
                     divStr          db ' / ','$'
-                    remStr           db ' % ','$'
-                    minS           db '-','$'
+                    remStr          db ' % ','$'
+                    minS            db '-','$'
                     msgPressAnyKey  db 0Ah,'Press any key to exit...', '$'
                     dividend        dw ?
                     divisor         dw ?
@@ -18,6 +18,155 @@
                     sign            db 0
                     isNegVal1       db 0
                     isNegVal2       db 0
+start:
+	                mov ax,@data	;настраиваем сегментные регистры
+                	mov ds,ax
+                    mov es,ax
+
+                    mov     ah,     09h             ;input number 1
+                    lea     dx,     [str1]
+                    int 21h
+                    lea cx, initStr
+                    call charInput 
+                    cmp sign,1
+                    jnz Num1
+                    mov isNegVal1,1
+                    Num1:                                       
+                    mov dividend,ax                    ;save number 1
+                    mov     ah,     09h
+                    lea     dx,     [newStr]
+                    int 21h  
+                    mov     ah,     09h             ;input number 2
+                    lea     dx,     [str2]
+                    int 21h
+                    lea cx, initStr
+                    mov dx,1
+                    call charInput
+                    cmp sign,1
+                    jnz Num2
+                    mov isNegVal2,1
+                    Num2:                    
+                    mov divisor ,ax                        ;save number 2
+                    mov     ah,     09h
+                    lea     dx,     [newStr] ;-
+                    int 21h 
+                    mov bl,isNegVal1
+                    mov sign,bl 
+                    cmp bl,1
+                    jnz print0
+                    mov ax,dividend
+                    cmp ax,0
+                    jz print0
+                    mov     ah,     09h             ;input number 1
+                    lea     dx,     [minS];-
+                    int 21h
+                    print0:
+                    mov ax,dividend
+                    call decPrint                   ;1num
+                    mov     ah,     09h
+                    lea     dx,     [divStr]
+                    int 21h
+                    
+                    mov bl,isNegVal2
+                    mov sign,bl
+                    cmp bl,1 
+                    jnz print1
+                    mov ax,divisor
+                    cmp ax,0
+                    jz print1
+                    mov     ah,     09h             ;input number 1
+                    lea     dx,     [minS];-
+                    int 21h
+                    print1:
+                    mov ax,divisor
+                    call decPrint                   ;2num
+                    mov     ah,     09h
+                    lea     dx,     [newStr]
+                    int 21h
+                    xor dx,dx
+                    mov ax,dividend
+                    div divisor
+                    mov remnant,dx
+                    xor bx,bx
+                    xor cx,cx
+                    mov bl,isNegVal1
+                    mov cl,isNegVal2
+
+                    cmp bl,cl
+
+                    jz print2
+                    cmp ax,0
+                    jz print2 
+                    xor cx,cx
+
+                    push ax
+                    mov     ah,     09h             ;input number 1
+                    lea     dx,     [minS];-
+                    int 21h
+                    pop ax
+                    print2:call decPrint                   ;1num / 2num
+
+                    mov     ah,     09h
+                    lea     dx,     [newStr]
+                    int 21h
+                    
+                    mov bl,isNegVal1
+                    mov sign,bl 
+                    cmp bl ,1
+                    jnz print3
+                    mov ax,dividend
+                    cmp ax,0
+                    jz print3
+                    mov     ah,     09h             ;input number 1
+                    lea     dx,     [minS];-
+                    int 21h
+                    print3:
+                    mov ax,dividend
+                    call decPrint
+                    mov     ah,     09h
+                    lea     dx,     [remStr]
+                    int 21h
+                    
+                    mov bl,isNegVal2
+                    mov sign,bl
+                    cmp bl ,1 
+                    jnz print4
+                    mov ax,divisor
+                    cmp ax,0
+                    jz print4
+                    mov     ah,     09h             ;input number 2
+                    lea     dx,     [minS];-
+                    int 21h
+                    print4:
+                    mov ax,divisor
+                    call decPrint
+                    mov     ah,     09h
+                    lea     dx,     [newStr]
+                    int 21h
+                    
+                    mov bl,isNegVal1
+                    mov sign,bl 
+                    cmp bl ,1
+                    jnz print5
+                    mov ax,remnant
+                    cmp ax,0
+                    jz print5
+                    mov     ah,     09h             ;input number 1
+                    lea     dx,     [minS];-
+                    int 21h
+                    print5:
+                    mov ax,remnant
+                    call decPrint 
+
+                    mov     ah,     09h
+                    lea     dx,     [msgPressAnyKey]
+                    int     21h
+                    mov     ah,     00h             ; ожидание ввода пользователя
+                    int     16h  
+
+                    mov ax,4c00h
+                    int 21h
+                
 charInput PROC
                     mov sign,0
                     push bx
@@ -28,6 +177,19 @@ charInput PROC
                     xor cx,cx
     resetLen:    
                     mov bx,5
+                    push si
+                    sub si,cx
+                    mov al,[si]
+                    pop si
+                    cmp al,'-'
+                    jnz w5
+                    mov bx,6
+    w5:
+                    mov al,[si-1]       ;negativ nums
+                    cmp al,'-'
+                    jnz w6
+                    mov bx,6
+    w6:
                     jmp charEnteringStr
     minus:          
                     cmp cx,1            ;negativ nums
@@ -46,7 +208,7 @@ charInput PROC
                     jcxz resetLen
                     mov al,[si-1]       ;negativ nums
                     cmp al,'-'          ;
-                    jz backspace        ;
+                    ;jz backspace        ;
                     dec si
                     mov dl,8
                     mov ah,02h
@@ -67,7 +229,7 @@ charInput PROC
                     ;cmp al,'-'          ;
                     dec cx                
                     dec si         
-                    mov byte ptr es:[si],' '
+                    mov byte ptr es:[si],' ' 
                     mov dl,8
                     mov ah,02h
                     int 21h
@@ -115,7 +277,7 @@ charInput PROC
                     cmp bl,'8'
                     jl recAX                    
                     jg BESC
-                    jmp final
+                    jmp recAX
     numberValue:
                     cmp cx,5
                     jne BESC
@@ -125,6 +287,8 @@ charInput PROC
                     jg BESC
 	final:
 					jmp finish
+    TOESC:
+                    jmp BESC
     check:
 					xor dx,dx
                     xor bx,bx
@@ -164,11 +328,10 @@ charInput PROC
                     jz BESC
                     jnz exit
     finish:
-                    jcxz BESC
-                    ;jz BESC
+                    jcxz TOESC
                     mov al,[si-1]       ;negativ nums
                     cmp al,'-'          ;
-                    jz CES  ;negativ nums
+                    jz CES              ;negativ nums
                     cmp cx,5                 
                     jae check
 
@@ -215,7 +378,6 @@ charInput PROC
                     pop bx          ;восстанавливаем регистры                       
                     ret 
     recNegValue:
-                    ;neg ax
                     pop dx
                     cmp ax,0
                     jz chares
@@ -255,7 +417,6 @@ decPrint proc
                     
                     cmp sign,1
                     jnz print
-                    ;neg ax
                     xor dx,dx                                   ; перевод из ax в строку буфера приёма es:di                   
                     print: 
                                     ;es:di - адрес буфера приемника
@@ -284,139 +445,4 @@ decPrint proc
                     pop cx
                     ret
 decPrint endp
-signer proc
-signer endp
-start:
-	                mov ax,@data	;настраиваем сегментные регистры
-                	mov ds,ax
-                    mov es,ax
-
-                    mov     ah,     09h             ;input number 1
-                    lea     dx,     [str1]
-                    int 21h
-                    lea cx, initStr
-                    call charInput 
-                    cmp sign,1
-                    jnz Num1
-                    mov isNegVal1,1
-                    Num1: 
-                                      
-                    mov dividend,ax                    ;save number 1
-                    mov     ah,     09h
-                    lea     dx,     [newStr]
-                    int 21h  
-                    mov     ah,     09h             ;input number 2
-                    lea     dx,     [str2]
-                    int 21h
-                    lea cx, initStr
-                    mov dx,1
-                    call charInput
-                    cmp sign,1
-                    jnz Num2
-                    mov isNegVal2,1
-                    Num2:                    
-                    mov divisor ,ax                        ;save number 2
-                    mov     ah,     09h
-                    lea     dx,     [newStr] ;-
-                    int 21h 
-                    mov bl,isNegVal1
-                    mov sign,bl 
-                    cmp bl,1
-                    jnz print0
-                    mov     ah,     09h             ;input number 1
-                    lea     dx,     [minS];-
-                    int 21h
-                    print0:
-                    mov ax,dividend
-                    call decPrint                   ;1num
-                    mov     ah,     09h
-                    lea     dx,     [divStr]
-                    int 21h
-                    
-                    mov bl,isNegVal2
-                    mov sign,bl
-                    cmp bl,1 
-                    jnz print1
-                    mov     ah,     09h             ;input number 1
-                    lea     dx,     [minS];-
-                    int 21h
-                    print1:
-                    mov ax,divisor
-                    call decPrint                   ;2num
-                    mov     ah,     09h
-                    lea     dx,     [newStr]
-                    int 21h
-                    xor dx,dx
-                    mov ax,dividend
-                    div divisor
-                    mov remnant,dx
-                    xor bx,bx
-                    xor cx,cx
-                    mov bl,isNegVal1
-                    mov cl,isNegVal2
-
-                    cmp bl,cl
-                    jz print2
-                    xor cx,cx
-                    push ax
-                    mov cx,ax
-                    mov     ah,     09h             ;input number 1
-                    lea     dx,     [minS];-
-                    int 21h
-                    
-                    mov ax,cx
-                    pop ax
-                    print2:call decPrint                   ;1num / 2num
-
-                    mov     ah,     09h
-                    lea     dx,     [newStr]
-                    int 21h
-                    
-                    mov bl,isNegVal1
-                    mov sign,bl 
-                    cmp bl ,1
-                    jnz print3
-                    mov     ah,     09h             ;input number 1
-                    lea     dx,     [minS];-
-                    int 21h
-                    print3:
-                    mov ax,dividend
-                    call decPrint
-                    mov     ah,     09h
-                    lea     dx,     [remStr]
-                    int 21h
-                    
-                    mov bl,isNegVal2
-                    mov sign,bl
-                    cmp bl ,1 
-                    jnz print4
-                    mov     ah,     09h             ;input number 1
-                    lea     dx,     [minS];-
-                    int 21h
-                    print4:
-                    mov ax,divisor
-                    call decPrint
-                    mov     ah,     09h
-                    lea     dx,     [newStr]
-                    int 21h
-                    
-                    mov bl,isNegVal1
-                    mov sign,bl 
-                    cmp bl ,1
-                    jnz print5
-                    mov     ah,     09h             ;input number 1
-                    lea     dx,     [minS];-
-                    int 21h
-                    print5:
-                    mov ax,remnant
-                    call decPrint 
-
-                    mov     ah,     09h
-                    lea     dx,     [msgPressAnyKey]
-                    int     21h
-                    mov     ah,     00h             ; ожидание ввода пользователя
-                    int     16h  
-
-                    mov ax,4c00h
-                    int 21h
 end start                    

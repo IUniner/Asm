@@ -51,7 +51,7 @@ charInput PROC
                     mov dl,8
                     int 21h
     charEnteringStr:
-                    xor ax,ax
+                    xor bx,bx
                     mov ah, 08h 
                     int 21h 
                     cmp al,8
@@ -71,7 +71,7 @@ charInput PROC
                     mov [si],al
                     inc si
                     inc cx                     
-                    mov dx,ax
+                    mov dx,bx
                     mov ah,02h
                     int 21h                                                      
                     jmp charEnteringStr
@@ -80,7 +80,7 @@ charInput PROC
     numberValue:
                     xor dx,dx
                     xor bx,bx
-                    xor ax,ax
+                    xor bx,bx
                     cmp cx,5
                     jne charEnteringStr
                     mov bl,[si-5]
@@ -119,13 +119,13 @@ charInput PROC
                     cmp cx,5                 
                     jz numberValue
     recAX:
-                    xor ax,ax
+                    xor bx,bx
                     xor bx,bx
                     xor dx,dx
                     mov bx,10
                     push cx
     recChar:
-                    xor ax,ax
+                    xor bx,bx
                     sub si,cx 
                     mov al, [si]
                     sub al, '0'
@@ -138,15 +138,15 @@ charInput PROC
                     loop multiply
     ready:                 
                     pop dx
-                    add dx,ax
+                    add dx,bx
                     pop cx
                     add si,cx
                     loop recChar  
                     pop cx
-                    mov ax,dx
+                    mov bx,dx
                     xor dx,dx                    
                     pop dx                    
-                    cmp ax,0
+                    cmp bx,0
                     jz chares     
                     pop cx   
                     pop bx          ;восстанавливаем регистры                       
@@ -161,7 +161,7 @@ decPrint proc                                       ; перевод из ax в 
                     push cx         ;сохраняем регистры
                     push dx
                     push bx
-                    push ax
+                    push bx
                     xor bx,bx       ;es:di - адрес буфера приемника
                     mov bx,10       ; основание системы
                     xor cx,cx       ; длина числа
@@ -170,7 +170,7 @@ decPrint proc                                       ; перевод из ax в 
                     div bx          ; dx = mod(ax, bx)
                     push dx         ; сохраняем dx в стек
                     inc cx          ; for LOOP
-                    cmp ax,0        ;test ax,ax      ; ax and ax = 0? : ZF = 1
+                    cmp bx,0        ;test ax,ax      ; ax and ax = 0? : ZF = 1
                     jnz divNum
     printNum:
                     pop dx
@@ -184,24 +184,24 @@ decPrint proc                                       ; перевод из ax в 
                     ; mov     ah,     09h
                     ; lea     dx,     [newStr]
                     ; int 21h
-                    pop ax
+                    pop bx
                     pop bx          ;восстанавливаем регистры
                     pop dx
                     pop cx
                     ret
 decPrint endp
 start:
-	                mov ax,@data	                ;настраиваем сегментные регистры
-                	mov ds,ax
-                    mov es,ax
+	                mov bx,@data	                ;настраиваем сегментные регистры
+                	mov ds,bx
+                    mov es,bx
 
                     mov     ah,     09h             ;input number 1
                     lea     dx,     [str1]
                     int 21h
                     lea cx, initStr  
                     call charInput                  
-                    mov dividend,ax 
-                    mov remnant,ax                       ;save number 1
+                    mov dividend,bx 
+                    mov remnant,bx                       ;save number 1
                     mov     ah,     09h
                     lea     dx,     [newStr]
                     int 21h  
@@ -211,43 +211,43 @@ start:
                     lea cx, initStr
                     mov dx,1
                     call charInput
-                    mov divisor ,ax                        ;save number 2
+                    mov divisor ,bx                        ;save number 2
                     mov     ah,     09h
                     lea     dx,     [newStr]
                     int 21h
 
-                    mov ax,dividend
+                    mov bx,dividend
                     call decPrint
                     mov     ah,     09h
                     lea     dx,     [divStr]
                     int 21h
-                    mov ax,divisor
+                    mov bx,divisor
                     call decPrint
                     mov     ah,     09h
                     lea     dx,     [newStr]
                     int 21h
-                    mov ax,dividend
+                    mov bx,dividend
                     div divisor
                     call decPrint 
 
-                    mov private,ax
+                    mov private,bx
                     mov     ah,     09h
                     lea     dx,     [newStr]
                     int 21h
-                    mov ax,private
+                    mov bx,private
                     mul divisor
-                    sub remnant,ax
-                    mov ax,dividend
+                    sub remnant,bx
+                    mov bx,dividend
                     call decPrint
                     mov     ah,     09h
                     lea     dx,     [remStr]
                     int 21h
-                    mov ax,divisor
+                    mov bx,divisor
                     call decPrint
                     mov     ah,     09h
                     lea     dx,     [newStr]
                     int 21h
-                    mov ax,remnant
+                    mov bx,remnant
                     call decPrint 
 
                     mov     ah,     09h
@@ -256,6 +256,6 @@ start:
                     mov     ah,     00h             ; ожидание ввода пользователя
                     int     16h 
 
-                    mov ax,4c00h
+                    mov bx,4c00h
                     int 21h
 end start                    

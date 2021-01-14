@@ -1,4 +1,5 @@
-.model small
+
+.model small    
 .stack 200h
 .data
                     strMLen         =  100
@@ -7,11 +8,11 @@
                     str1            db 0Dh,'Enter string: ',0Ah,'$'
                     message         db 'NO','$'
                     YES             db 'YES','$'
-                    vectorInt       dw 79 dup (0)
+                    vectorInt       db 79 dup (0)
                     testInt            dw 'a','c','a',' ','a','b','a','f','d','f','a','c','a','a','b','a','$'
                     strSize         dw 0
                     part            dw 0
-                    string          dw 79 dup ('$')
+                    string          db 79 dup (0)
                     msgPressAnyKey  db 0Ah,'Press any key to exit...', '$'
 .code               ; -32768..32767 
 charInput PROC
@@ -80,8 +81,8 @@ charInput PROC
                     mov [si],al
                     push si
                     mov si,strSize
-                    mov string[si],ax                                   
-                    mov ax,string[si]
+                    mov string[si],al                                   
+                    mov al,string[si]
                     pop si
                     inc strSize
                     inc si
@@ -112,7 +113,7 @@ charOut PROC
                     mov si,0
                     mov cx,strSize
     print0:
-                    mov dx,string[si]
+                    mov dl,string[si]
                     inc si
                     mov ah,02h
                     int 21h
@@ -138,8 +139,8 @@ vectorOut PROC
                     mov si,0
                     mov cx,strSize
     print1:
-                    mov dx,vectorInt[si]
-                    add dx,'0'
+                    mov dl,vectorInt[si]
+                    add dl,'0'
                     inc si
                     mov ah,02h
                     int 21h
@@ -197,7 +198,7 @@ decPrint proc
                     jnz divNum
     printNum:
                     pop dx
-                    add dx,'0'
+                    add dl,'0'
                     mov ah,02h
                     int 21h
                     ;pop ax          ; берём число из стека от начала
@@ -216,36 +217,39 @@ kmp proc
                     xor si,si
                     mov si,1
 
+
                     while_ft:
+                    mov bh,0
                     cmp si,strSize
                     jge return
 
-                    mov bx,vectorInt[si-1]
+                    mov bl,vectorInt[si-1]
                     
                     while_sc:
+                        mov bh,0
                         cmp bl,0
                         jle continue
                         xor ax,ax
                         xor cx,cx
-                        mov ax,string[bx]
-                        mov cx,string[si]
+                        mov al,string[bx]
+                        mov cl,string[si]
                         cmp al,cl
                         jz continue
 
-                        mov bx, vectorInt[bx-1]
+                        mov bl, vectorInt[bx-1]
                     jmp while_sc
                     continue:
 
                     if_ft:
                         xor ax,ax
                         xor cx,cx
-                        mov ax,string[bx]
-                        mov cx,string[si]
+                        mov al,string[bx]
+                        mov cl,string[si]
                         cmp al,cl
                         jnz if_exit
-                        inc bx
+                        inc bl
                     if_exit:
-                    mov vectorInt[si],bx
+                    mov vectorInt[si],bl
                     inc si
                     
                     jmp while_ft
@@ -278,15 +282,16 @@ start:
                     cmp si,strSize
                     jge while_td_exit
         if_sd:
-                    mov ax,string[si]
+                    mov al,string[si]
                     mov bl,' '
                     cmp al,bl
                     jnz if_sd_exit
                     mov part, si
         if_sd_exit:
         if_td:
-                    mov ax,vectorInt[si]
+                    mov al,vectorInt[si]
                     mov bx,part
+                    mov bl,0
                     cmp al,bl                                        
                     jnz if_td_exit 
                     lea     dx,     [YES]
@@ -307,4 +312,4 @@ start:
 
                     mov ax,4c00h
                     int 21h
-end start                    
+end start

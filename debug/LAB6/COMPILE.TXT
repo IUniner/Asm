@@ -1,0 +1,10 @@
+Turbo Assembler  Version 4.0  Copyright (c) 1988, 1993 Borland International
+
+Assembling file:   LAB6.ASM
+**Error** LAB6.ASM(853) Argument to operation or instruction has illegal size
+**Error** LAB6.ASM(907) Undefined symbol: OUTPUT
+Error messages:    2
+Warning messages:  None
+Passes:            1
+Remaining memory:  468k
+

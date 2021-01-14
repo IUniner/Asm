@@ -1,2 +1,0 @@
-Turbo Link  Version 4.01 Copyright (c) 1991 Borland International
-Fatal: 32-bit record encountered in module TEST2.ASM

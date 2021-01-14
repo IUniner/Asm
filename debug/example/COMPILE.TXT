@@ -1,8 +1,9 @@
 Turbo Assembler  Version 4.0  Copyright (c) 1988, 1993 Borland International
 
 Assembling file:   example.ASM
-Error messages:    None
+**Fatal** Command line: Can't locate file: example.ASM
+Error messages:    1
 Warning messages:  None
 Passes:            1
-Remaining memory:  469k
+Remaining memory:  470k
 

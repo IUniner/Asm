@@ -1,0 +1,48 @@
+﻿  stdafx.cpp
+  Source.cpp
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(9,1): warning C4005: 'STRICT': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(23): message : see previous definition of 'STRICT'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(30,12): error C2731: 'wWinMain': function cannot be overloaded
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(30): message : see declaration of 'wWinMain'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(167,48): error C2440: 'initializing': cannot convert from 'const wchar_t [20]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(167,18): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(320,21): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(320,21): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(320,35): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(320,35): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(320,49): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(320,49): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(321,2): error C2440: 'initializing': cannot convert from 'const wchar_t [4]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(321,2): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(321,14): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(321,14): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(322,2): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(322,2): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(322,16): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(322,16): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(324,23): error C2440: 'initializing': cannot convert from 'const wchar_t [1]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(324,23): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(324,30): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(324,30): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(324,44): error C2440: 'initializing': cannot convert from 'const wchar_t [6]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(324,44): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(325,2): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(325,2): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(325,17): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(325,17): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(326,2): error C2440: 'initializing': cannot convert from 'const wchar_t [4]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(326,2): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(326,15): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(326,15): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(327,2): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(327,2): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(327,17): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(327,17): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(328,2): error C2440: 'initializing': cannot convert from 'const wchar_t [6]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(328,2): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(328,18): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(328,18): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(329,2): error C2440: 'initializing': cannot convert from 'const wchar_t [6]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(329,2): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(329,18): error C2440: 'initializing': cannot convert from 'const wchar_t [5]' to 'LPTSTR'
+C:\Users\Asus\Desktop\Progrt.Asm\Progr\LIGHT_COPY\5_mouse\mouse\Source.cpp(329,18): message : Conversion from string literal loses const qualifier (see /Zc:strictStrings)

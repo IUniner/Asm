@@ -12,7 +12,7 @@ max db 10 ; - max lenght
 
 .code
 outint proc
-	add ax,3030h
+	add bx,3030h
 	mov dl,ah
 	mov dh,al
 	mov ah,02h ; input num's symbol 
@@ -23,8 +23,8 @@ outint proc
 outint endp
 
 main:
-mov ax,@data	; ah -> ax, al -> cx
-mov ds,ax	; bh -> bx, bl -> dx
+mov bx,@data	; ah -> ax, al -> cx
+mov ds,bx	; bh -> bx, bl -> dx
 
 if_ft:
 	mov bx,a 
@@ -40,10 +40,10 @@ if_ft:
 	cmp bx,dx
 	jne else_ft
 	
-	mov ax, a ; ah or ax
-	add ax,b
-	add ax,c
-	add ax,d
+	mov bx, a ; ah or ax
+	add bx,b
+	add bx,c
+	add bx,d
 	jmp if_end
 
 else_ft:
@@ -60,18 +60,18 @@ else_ft:
 		cmp bx,dx
 		jne else_sd
 
-		mov ax,a
-		xor ax,b
+		mov bx,a
+		xor bx,b
 		mov cx,c ; al or cx
 		and cx ,d
-		xor ax,cx
+		xor bx,cx
 		jmp if_end
 	else_sd:
-		mov ax,a
-		xor ax,b
+		mov bx,a
+		xor bx,b
 		mov cx,c
 		and cx,d
-		add ax,cx
+		add bx,cx
 if_end:
 
 LEA DX, max
@@ -80,6 +80,6 @@ INT 21h
 
 call outint
 exit:
-mov ax,4c00h ; mov ah,4ch
+mov bx,4c00h ; mov ah,4ch
 int 21h
 end main
