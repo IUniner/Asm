@@ -2,7 +2,7 @@
 
 # Other files and folders
 data/
-example/
+debug/example/
 
 # Executables
 *.exe
